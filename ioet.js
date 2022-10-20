@@ -1,4 +1,3 @@
-//Array de días
 const daysOfWeek = ["monday","tuesday","wednesday","thursday","friday","saturday","sunday"]
 
 const fs = require("fs")
@@ -50,17 +49,15 @@ const compareHoursMinutes = (daysMatched) =>{
 const compareTimetable = (name1,name2) =>{
     const employeeOne = bringUser(name1)
     const employeeTwo = bringUser(name2)
-
     const daysMatched = compareDays(employeeOne,employeeTwo);
-
     const ocurrences = compareHoursMinutes(daysMatched);
-
+    
     console.log(`La cantidad de veces que se encuentran en la oficina ${name1} y ${name2} son: ${ocurrences}`)
 }
 
 module.exports = {compareTimetable}
 
 // Correr en consola.
-// npx run-func ioet.js compareTimetable CONSTANCIO JULIA 
+// npx run-func ioet.js compareTimetable nombre1 nombre2
 
 
