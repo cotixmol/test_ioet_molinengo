@@ -13,30 +13,55 @@ const bringEmployee = (employeeName) => {
     }
 }
 
+const checkNames = (employeeOne,employeeTwo) =>{
+
+    const conditionA = JSON.stringify(employeeOne) === JSON.stringify(employeeTwo);
+    const conditionB = employeeOne == false || employeeTwo == false; 
+    
+    if(conditionA && conditionB){
+        console.log("Ingresar nombres de empleados validos");
+        return false;
+    }else if(conditionA){
+        console.log("No se puede comparar a la misma persona");
+        return false;
+    }else if(conditionB){
+        console.log("Una o ambas personas no existen");
+        return false;
+    }else{
+        return true;
+    }
+}
+
 const compareDays = (employeeOne,employeeTwo) =>{
     const daysMatched = new Object();
-    try{
-        for (let day of daysOfWeek){
-            if (employeeOne[0][day] == false || employeeTwo[0][day] == false){}
-            else{
-                const employeeOneStartTime = (employeeOne[0][day].split("-"))[0];
-                const employeeOneEndTime = (employeeOne[0][day].split("-"))[1];
-                const employeeTwoStartTime = (employeeTwo[0][day].split("-"))[0];
-                const employeeTwoEndTime = (employeeTwo[0][day].split("-"))[1]
-    
-                const conditionA = (employeeOneStartTime.length===5 && employeeOneStartTime<"23:59");
-                const conditionB = (employeeOneEndTime.length===5 && employeeOneEndTime<"23:59");
-                const conditionC = (employeeTwoStartTime.length===5 && employeeTwoStartTime<"23:59");
-                const conditionD = (employeeTwoEndTime.length===5 && employeeTwoEndTime<"23:59");
-    
-                if (conditionA && conditionB && conditionC && conditionD){
-                    daysMatched[day]=[employeeOneStartTime,employeeOneEndTime,employeeTwoStartTime,employeeTwoEndTime]
+    const namesChecked = checkNames(employeeOne,employeeTwo)
+
+    if (namesChecked === true){
+        try{
+            for (let day of daysOfWeek){
+                if (employeeOne[0][day] == false || employeeTwo[0][day] == false){}
+                else{
+                    const employeeOneStartTime = (employeeOne[0][day].split("-"))[0];
+                    const employeeOneEndTime = (employeeOne[0][day].split("-"))[1];
+                    const employeeTwoStartTime = (employeeTwo[0][day].split("-"))[0];
+                    const employeeTwoEndTime = (employeeTwo[0][day].split("-"))[1]
+        
+                    const conditionA = (employeeOneStartTime.length===5 && employeeOneStartTime<"23:59");
+                    const conditionB = (employeeOneEndTime.length===5 && employeeOneEndTime<"23:59");
+                    const conditionC = (employeeTwoStartTime.length===5 && employeeTwoStartTime<"23:59");
+                    const conditionD = (employeeTwoEndTime.length===5 && employeeTwoEndTime<"23:59");
+        
+                    if (conditionA && conditionB && conditionC && conditionD){
+                        daysMatched[day]=[employeeOneStartTime,employeeOneEndTime,employeeTwoStartTime,employeeTwoEndTime]
+                    }
                 }
             }
+            return daysMatched    
+        }catch{
+            console.log("Algun dato horario en el archivo .txt esta formateado erroneamente")
         }
-        return daysMatched    
-    }catch{
-        console.log("Algun dato horario en el archivo .txt esta formateado erroneamente")
+    }else{
+        console.log("Error")
     }
 }
 
@@ -104,14 +129,10 @@ const compareTimetable = (nameOne,nameTwo) =>{
     try{
         const employeeOne = bringEmployee(nameOne.toUpperCase());
         const employeeTwo = bringEmployee(nameTwo.toUpperCase());
-        
-        if (JSON.stringify(employeeOne) === JSON.stringify(employeeTwo)){
-            console.log("Ingresar empleados con nombres diferentes");
-        }else{
-            const daysMatched = compareDays(employeeOne,employeeTwo);
-            const ocurrences = compareHoursMinutes(daysMatched);
-            console.log(`COINCIDENCIAS EN LA OFICINA ENTRE ${nameOne.toUpperCase()} y ${nameTwo.toUpperCase()}: ${ocurrences}`);
-        }
+
+        const daysMatched = compareDays(employeeOne,employeeTwo);
+        const ocurrences = compareHoursMinutes(daysMatched);
+        console.log(`COINCIDENCIAS EN LA OFICINA ENTRE ${nameOne.toUpperCase()} y ${nameTwo.toUpperCase()}: ${ocurrences}`);
 
     }catch(error){
         console.log("El programa no pudo seguir corriendo debido a un error.");
@@ -123,7 +144,7 @@ module.exports = {compareAllTimetable, compareTimetable, getAllNames}
 
 // Instalar node@latest LTS
 // Correr en consola
-// npx run-func ioet.js compareTimetable nombre1 nombre2
-// npx run-func ioet.js compareAllTimetable
-// npx run-func ioet.js getAllNames
+// npm run compareall
+// npm run compare <nombre1> <nombre2>
+// npm run getnames
 

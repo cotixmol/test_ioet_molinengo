@@ -4,7 +4,10 @@
   "description": "<h1>Test Ioet Molinengo</h1>",
   "main": "ioet.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "getnames": "npx run-func ioet.js getAllNames",
+    "compareall": "npx run-func ioet.js compareAllTimetable",
+    "compare": "npx run-func ioet.js compareTimetable"
   },
   "repository": {
     "type": "git",
