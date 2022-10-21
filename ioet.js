@@ -65,7 +65,7 @@ const compareDays = (employeeOne,employeeTwo) =>{
     }
 }
 
-const compareHoursMinutes = (daysMatched) =>{
+const compareTimes = (daysMatched) =>{
     let ocurrences = Object.keys(daysMatched).length;
     for (let day of daysOfWeek){
 
@@ -115,7 +115,7 @@ const compareAllTimetable = () =>{
         
             const daysMatched = compareDays(employeeOne,employeeTwo);
         
-            const ocurrences = compareHoursMinutes(daysMatched);
+            const ocurrences = compareTimes(daysMatched);
             
             console.log(`${ocurrences} COINCIDENCIAS:       ${nameOne} y ${nameTwo}`)
         }
@@ -128,10 +128,9 @@ const compareAllTimetable = () =>{
 const compareTimetable = (nameOne,nameTwo) =>{
     try{
         const employeeOne = bringEmployee(nameOne.toUpperCase());
-        const employeeTwo = bringEmployee(nameTwo.toUpperCase());
-
+        const employeeTwo = bringEmployee(nameTwo.toUpperCase())
         const daysMatched = compareDays(employeeOne,employeeTwo);
-        const ocurrences = compareHoursMinutes(daysMatched);
+        const ocurrences = compareTimes(daysMatched);
         console.log(`COINCIDENCIAS EN LA OFICINA ENTRE ${nameOne.toUpperCase()} y ${nameTwo.toUpperCase()}: ${ocurrences}`);
 
     }catch(error){
