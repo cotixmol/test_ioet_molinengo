@@ -61,25 +61,50 @@ const compareHoursMinutes = (daysMatched) =>{
     return ocurrences
 }
 
-const compareTimetable = (nameOne,nameTwo) =>{
-    try{
-        const nameOneUpper = nameOne.toUpperCase()
-        const nameTwoUpper = nameTwo.toUpperCase()
+const getAllNames = () => {
+    const employeesFile = fs.readFileSync("./employees.txt","utf-8")
+    const employeesArray = JSON.parse(employeesFile)
+    const employeesNamesArray = employeesArray.map((elm) => elm.name)
+    return employeesNamesArray;  
+}
 
-        const employeeOne = bringEmployee(nameOneUpper)
-        const employeeTwo = bringEmployee(nameTwoUpper)
-    
-        const daysMatched = compareDays(employeeOne,employeeTwo);
-    
-        const ocurrences = compareHoursMinutes(daysMatched);
+const getPairOfNames = (employeesNamesArray) => {
+    const pairOfNamesArray = [].concat(...employeesNamesArray.map(
+        (elm, index) => employeesNamesArray.slice(index+1).map(
+             (elm2) => elm + ' ' + elm2 )));
+    return pairOfNamesArray
+}
+
+
+const compareAllTimetable = () =>{
+    try{
+
+        const employeesNamesArray = getAllNames()
+        const pairOfNamesArray = getPairOfNames(employeesNamesArray)
+
+        for (let i=0;i<pairOfNamesArray.length;i++){
+
+            const nameOne = (pairOfNamesArray[i].split(" "))[0]
+            const nameTwo = (pairOfNamesArray[i].split(" "))[1]
+
+            const employeeOne = bringEmployee(nameOne)
+            const employeeTwo = bringEmployee(nameTwo)
         
-        console.log(`LA CANTIDAD DE ENCUENTROS ENTRE ${nameOneUpper} y ${nameTwoUpper} EN LA OFICINA SON: ${ocurrences}`)
+            const daysMatched = compareDays(employeeOne,employeeTwo);
+        
+            const ocurrences = compareHoursMinutes(daysMatched);
+            
+            console.log(`${ocurrences} COINCIDENCIAS:       ${nameOne} y ${nameTwo}`)
+        }
+
     }catch(error){
-        console.log("El programa no pudo correr debido a un error.")
+        console.log("El programa no pudo seguir corriendo debido a un error.")
     }
 }
 
-module.exports = {compareTimetable}
+
+module.exports = {compareAllTimetable}
+
 
 
 // Instalar node@latest LTS
