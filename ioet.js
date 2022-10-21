@@ -2,23 +2,22 @@ const daysOfWeek = ["monday","tuesday","wednesday","thursday","friday","saturday
 
 const fs = require("fs")
 
-const bringEmployee = (name) => {
+const bringEmployee = (employeeName) => {
     try{
         const employeesFile = fs.readFileSync("./employees.txt","utf-8")
         const employeesArray = JSON.parse(employeesFile)
-        const employeeObj = employeesArray.filter((elm) => elm.name === name)
+        const employeeObj = employeesArray.filter((elm) => elm.name === employeeName)
         return employeeObj
     }catch(ReferenceError){
         console.log("El Archivo 'employees.txt' no fue encontrado en el directorio local")
     }
-
 }
 
 const compareDays = (employeeOne,employeeTwo) =>{
     const daysMatched = new Object();
     try{
         for (let day of daysOfWeek){
-            if (employeeOne[0][day] === "" || employeeTwo[0][day] === ""){}
+            if (employeeOne[0][day] == false || employeeTwo[0][day] == false){}
             else{
                 const employeeOneStartTime = (employeeOne[0][day].split("-"))[0];
                 const employeeOneEndTime = (employeeOne[0][day].split("-"))[1];
@@ -75,7 +74,6 @@ const getPairOfNames = (employeesNamesArray) => {
     return pairOfNamesArray
 }
 
-
 const compareAllTimetable = () =>{
     try{
 
@@ -102,13 +100,30 @@ const compareAllTimetable = () =>{
     }
 }
 
+const compareTimetable = (nameOne,nameTwo) =>{
+    try{
+        const employeeOne = bringEmployee(nameOne.toUpperCase());
+        const employeeTwo = bringEmployee(nameTwo.toUpperCase());
+        
+        if (JSON.stringify(employeeOne) === JSON.stringify(employeeTwo)){
+            console.log("Ingresar empleados con nombres diferentes");
+        }else{
+            const daysMatched = compareDays(employeeOne,employeeTwo);
+            const ocurrences = compareHoursMinutes(daysMatched);
+            console.log(`COINCIDENCIAS EN LA OFICINA ENTRE ${nameOne.toUpperCase()} y ${nameTwo.toUpperCase()}: ${ocurrences}`);
+        }
 
-module.exports = {compareAllTimetable}
+    }catch(error){
+        console.log("El programa no pudo seguir corriendo debido a un error.");
+    }
+}
 
+module.exports = {compareAllTimetable, compareTimetable, getAllNames}
 
 
 // Instalar node@latest LTS
 // Correr en consola
 // npx run-func ioet.js compareTimetable nombre1 nombre2
-
+// npx run-func ioet.js compareAllTimetable
+// npx run-func ioet.js getAllNames
 

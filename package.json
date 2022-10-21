@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/cotixmol/test_ioet_molinengo/issues"
   },
-  "homepage": "https://github.com/cotixmol/test_ioet_molinengo#readme"
+  "homepage": "https://github.com/cotixmol/test_ioet_molinengo#readme",
+  "dependencies": {
+    "run-func": "^3.0.0"
+  }
 }
