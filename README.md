@@ -27,7 +27,7 @@ The data from the employees and for use in this project are located in a .txt fi
 
 ```
 
-<u>The structure MUST contain this different keys and values:</u>
+<strong>The structure MUST contain this different keys and values:</strong>
 
 <ul>
     <li><strong>"id"</strong>: "string"</li>    
@@ -41,7 +41,7 @@ The data from the employees and for use in this project are located in a .txt fi
     <li><strong>"sunday"</strong>: "string"</li>
 </ul>
 
-<u>Rules for formatting data structure:</u>
+<strong>Rules for formatting data structure:</strong>
 
 <ul>
     <li> The "id" value must be equal to a numeric string. These identify each object starting from 1 to infinite. </li>
