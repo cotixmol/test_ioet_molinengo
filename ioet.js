@@ -1,7 +1,6 @@
 const fs = require("fs")
 const daysOfWeek = ["monday","tuesday","wednesday","thursday","friday","saturday","sunday"]
 
-
 const bringEmployee = (employeeName) => {
     try{
         const employeesFile = fs.readFileSync("./employees.txt","utf-8")
@@ -34,21 +33,23 @@ const checkNames = (employeeOne,employeeTwo) =>{
     }
 }
 const checkTimes = (employeeOne,employeeTwo,day) =>{    
-    const employeeOneStartTime = (employeeOne[0][day].split("-"))[0];
-    const employeeOneEndTime = (employeeOne[0][day].split("-"))[1];
-    const employeeTwoStartTime = (employeeTwo[0][day].split("-"))[0];
-    const employeeTwoEndTime = (employeeTwo[0][day].split("-"))[1]    
-
-    const conditionA = (employeeOneStartTime.length===5 && employeeOneStartTime<"23:59");
-    const conditionB = (employeeOneEndTime.length===5 && employeeOneEndTime<"23:59");
-    const conditionC = (employeeTwoStartTime.length===5 && employeeTwoStartTime<"23:59");
-    const conditionD = (employeeTwoEndTime.length===5 && employeeTwoEndTime<"23:59");
-
-    if (conditionA && conditionB && conditionC && conditionD){
-        const times = [employeeOneStartTime,employeeOneEndTime,employeeTwoStartTime,employeeTwoEndTime]
-        return times
-    }else{
-        return ""
+    try{
+        const employeeOneStartTime = (employeeOne[0][day].split("-"))[0];
+        const employeeOneEndTime = (employeeOne[0][day].split("-"))[1];
+        const employeeTwoStartTime = (employeeTwo[0][day].split("-"))[0];
+        const employeeTwoEndTime = (employeeTwo[0][day].split("-"))[1]    
+    
+        const conditionA = (employeeOneStartTime.length===5 && employeeOneStartTime<"23:59");
+        const conditionB = (employeeOneEndTime.length===5 && employeeOneEndTime<"23:59");
+        const conditionC = (employeeTwoStartTime.length===5 && employeeTwoStartTime<"23:59");
+        const conditionD = (employeeTwoEndTime.length===5 && employeeTwoEndTime<"23:59");
+    
+        if (conditionA && conditionB && conditionC && conditionD){
+            const times = [employeeOneStartTime,employeeOneEndTime,employeeTwoStartTime,employeeTwoEndTime]
+            return times
+        }
+    }catch{
+        console.log("Error en la estructura horario del archivo employees.txt")
     }
 }
 const compareDays = (employeeOne,employeeTwo) =>{
@@ -68,6 +69,8 @@ const compareDays = (employeeOne,employeeTwo) =>{
         }catch{
             console.log("Algun dato horario en el archivo .txt esta formateado erroneamente")
         }
+    }else{
+        console.log("Error en la introducción de nombres")
     }
 }
 const compareTimes = (daysMatched) =>{
@@ -90,9 +93,9 @@ const compareTimes = (daysMatched) =>{
     return ocurrences
 }
 const getPairOfNames = (employeesNamesArray) => {
-    const pairOfNamesArray = [].concat(...employeesNamesArray.map(
-        (elm, index) => employeesNamesArray.slice(index+1).map(
-             (elm2) => elm + ' ' + elm2 )));
+    const pairOfNamesArray = [].concat(...employeesNamesArray.map( (elm, index) => 
+        employeesNamesArray.slice(index+1).map((elm2) => 
+            elm + ' ' + elm2 )));
     return pairOfNamesArray
 }
 
@@ -101,9 +104,23 @@ const getAllNames = () => {
         const employeesFile = fs.readFileSync("./employees.txt","utf-8")
         const employeesArray = JSON.parse(employeesFile)
         const employeesNamesArray = employeesArray.map((elm) => elm.name)
-        return employeesNamesArray.join("\n")+"\n";  
+        return employeesNamesArray; 
     }catch(ReferenceError){
         console.log("El Archivo 'employees.txt' no fue encontrado en el directorio local")
+    }
+}
+const compareTimetable = (nameOne,nameTwo) =>{
+    try{
+        const employeeOne = bringEmployee(nameOne.toUpperCase());
+        const employeeTwo = bringEmployee(nameTwo.toUpperCase())
+        const daysMatched = compareDays(employeeOne,employeeTwo);
+        const ocurrences = compareTimes(daysMatched);
+        console.log(`COINCIDENCIAS EN LA OFICINA ENTRE ${nameOne.toUpperCase()} y ${nameTwo.toUpperCase()}: ${ocurrences}`);
+        return "FIN"
+
+    }catch(error){
+        console.log("El programa no pudo seguir corriendo debido a un error.\n");
+        return "ERROR"
     }
 }
 const compareAllTimetable = () =>{
@@ -131,21 +148,9 @@ const compareAllTimetable = () =>{
         console.log("El programa no pudo seguir corriendo debido a un error.")
     }
 }
-const compareTimetable = (nameOne,nameTwo) =>{
-    // try{
-        const employeeOne = bringEmployee(nameOne.toUpperCase());
-        const employeeTwo = bringEmployee(nameTwo.toUpperCase())
-        const daysMatched = compareDays(employeeOne,employeeTwo);
-        const ocurrences = compareTimes(daysMatched);
-        console.log(`COINCIDENCIAS EN LA OFICINA ENTRE ${nameOne.toUpperCase()} y ${nameTwo.toUpperCase()}: ${ocurrences}`);
-
-    // }catch(error){
-    //     console.log("El programa no pudo seguir corriendo debido a un error.");
-    // }
-}
 
 module.exports = {
-    bringEmployee, checkNames,
+    bringEmployee, checkNames, compareDays,
 
     compareAllTimetable, compareTimetable, getAllNames
 }
