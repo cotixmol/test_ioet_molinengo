@@ -3,11 +3,11 @@
 <h1>Show the amount of times employees match in office.</h1>
 
 <h2>Content Table</h2>
-1 <a href=#introduction>Introduction</a>
-1 <a href=#data-structure>Data Structure</a>
-1 <a href=#node>Node.js Project</a>
-1 <a href=#app>Application Execution</a>
-1 <a href=#code>App Code: technical design of functions</a>
+1. <p><a href=#introduction>Introduction</a></p>
+2. <p><a href=#data-structure>Data Structure</a></p>
+3. <p><a href=#node>Node.js Project</a></p>
+4. <p><a href=#app>Application Execution</a></p>
+5. <p><a href=#code>App Code: technical design of functions</a></p>
 
 <h2 name="introduction">Introduction</h2>
 It was requested by the recruiting team from <strong>Ioet</strong> to develop an application able to identify the number of times two persons share the same time in an office in a week.
