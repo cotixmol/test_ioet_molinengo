@@ -2,10 +2,17 @@
 
 <h1>Show the amount of times employees match in office.</h1>
 
-<h2>Introduction</h2>
+<h2>Content Table</h2>
+1 [Introduction](#introduction)
+2 [Data Structure](#data-structure)
+3 [Node.js Project](#node)
+4 [Application Execution](#app)
+5 [App Code: technical design of functions](#code)
+
+<h2 name="introduction">Introduction</h2>
 It was requested by the recruiting team from <strong>Ioet</strong> to develop an application able to identify the number of times two persons share the same time in an office in a week.
 
-<h2>Data Structure</h2>
+<h2 name="data-structure">Data Structure</h2>
 The data from the employees and for use in this project are located in a .txt file named "employees.txt" in the main directory of the project. The structure of this file is an array filled with different objects, each representing an employee, and organized as follows:
 
 ```
@@ -58,7 +65,7 @@ The data from the employees and for use in this project are located in a .txt fi
 
 <strong>Any mistake in the employees.txt file structure will lead to unexpected results.</strong>
 
-<h2>Node.js Project</h2>
+<h2 name="node">Node.js Project</h2>
 
 The project is written in Javascript language over a Node.js LTS enviroment (v. 16.16.0) and using npm (v. 8.19.2).
 
@@ -77,7 +84,7 @@ In the project directory is a "package.json" file where all the dependencies are
 
 `npm install --save-dev jest`
 
-<h2>App Execution</h2>
+<h2 name="app">Application Execution</h2>
 
 <p>The app runs by design three diferente commands on the project directory:</p>
 
@@ -87,7 +94,7 @@ In the project directory is a "package.json" file where all the dependencies are
 
 `npm run compareall` : Show all the possible pair-combination of all employees listed on "employees.txt" and the amount of times they share time in the office.
 
-<h2>App Code: technical design of functions</h2>
+<h2 name="code">App Code: technical design of functions</h2>
     
 In the main directory of the project there is a file called "ioet.js". In that file are the 10 functions that run this application. These functions are:
 
