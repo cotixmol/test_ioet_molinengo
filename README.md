@@ -114,7 +114,7 @@ The test can be run using the command:
 
 <h2 name="code">App Code: technical design of functions</h2>
     
-In the main directory of the project there is a file called "ioet.js". In that file are the 10 functions that run this application. These functions are:
+In the main directory of the project there is a file called "ioet.js". In that file are the 9 functions that run this application. These functions are:
 
 <details>
     <summary><h3>1) bringEmployee(employeeName)</h3></summary>
