@@ -5,16 +5,16 @@ const bringEmployee = (employeeName) => {
     try{
         const employeesFile = fs.readFileSync("./employees.txt","utf-8")
         const employeesArray = JSON.parse(employeesFile)
-        const employeeObj = employeesArray.filter((elm) => elm.name === employeeName)
-        return employeeObj
+        const employeeArray = employeesArray.filter((elm) => elm.name === employeeName)
+        return employeeArray
     }catch(ReferenceError){
         console.log("El Archivo 'employees.txt' no fue encontrado en el directorio local")
     }
 }
-const checkNames = (employeeOne,employeeTwo) =>{
+const checkNames = (employeeOneArray,employeeTwoArray) =>{
 
-    const conditionA = (JSON.stringify(employeeOne) === JSON.stringify(employeeTwo));
-    const conditionB = (employeeOne == false || employeeTwo == false); 
+    const conditionA = (JSON.stringify(employeeOneArray) === JSON.stringify(employeeTwoArray));
+    const conditionB = (employeeOneArray == false || employeeTwoArray == false); 
     
     if(conditionA && conditionB){
         console.log("Ingresar nombres de empleados validos");
@@ -32,12 +32,12 @@ const checkNames = (employeeOne,employeeTwo) =>{
         return true;
     }
 }
-const checkTimes = (employeeOne,employeeTwo,day) =>{    
+const checkTimes = (employeeOneArray,employeeTwoArray,day) =>{    
     try{
-        const employeeOneStartTime = (employeeOne[0][day].split("-"))[0];
-        const employeeOneEndTime = (employeeOne[0][day].split("-"))[1];
-        const employeeTwoStartTime = (employeeTwo[0][day].split("-"))[0];
-        const employeeTwoEndTime = (employeeTwo[0][day].split("-"))[1]    
+        const employeeOneStartTime = (employeeOneArray[0][day].split("-"))[0];
+        const employeeOneEndTime = (employeeOneArray[0][day].split("-"))[1];
+        const employeeTwoStartTime = (employeeTwoArray[0][day].split("-"))[0];
+        const employeeTwoEndTime = (employeeTwoArray[0][day].split("-"))[1]    
     
         const conditionA = (employeeOneStartTime.length===5 && employeeOneStartTime<"23:59");
         const conditionB = (employeeOneEndTime.length===5 && employeeOneEndTime<"23:59");
@@ -47,21 +47,24 @@ const checkTimes = (employeeOne,employeeTwo,day) =>{
         if (conditionA && conditionB && conditionC && conditionD){
             const times = [employeeOneStartTime,employeeOneEndTime,employeeTwoStartTime,employeeTwoEndTime]
             return times
+        }else{
+            console.log("Hay errores en las horas de ingreso y de salida en el archivo employees.txt")
+            throw new Error;
         }
     }catch{
         console.log("Error en la estructura horario del archivo employees.txt")
     }
 }
-const compareDays = (employeeOne,employeeTwo) =>{
+const compareDays = (employeeOneArray,employeeTwoArray) =>{
     const daysMatched = new Object();
-    const namesChecked = checkNames(employeeOne,employeeTwo)
+    const namesChecked = checkNames(employeeOneArray,employeeTwoArray)
     
     if (namesChecked){
         try{
             for (let day of daysOfWeek){
-                if (employeeOne[0][day] == false || employeeTwo[0][day] == false){
+                if (employeeOneArray[0][day] == false || employeeTwoArray[0][day] == false){
                 }else{
-                    const times = checkTimes (employeeOne,employeeTwo,day)
+                    const times = checkTimes (employeeOneArray,employeeTwoArray,day)
                     daysMatched[day]=times;
                 }
             }
@@ -109,10 +112,10 @@ const getAllNames = () => {
         console.log("El Archivo 'employees.txt' no fue encontrado en el directorio local")
     }
 }
-const compareTimetable = (nameOne,nameTwo) =>{
+const compareTimetable = (employeeNameOne,employeeNameTwo) =>{
     try{
-        const employeeOne = bringEmployee(nameOne.toUpperCase());
-        const employeeTwo = bringEmployee(nameTwo.toUpperCase())
+        const employeeOne = bringEmployee(employeeNameOne.toUpperCase());
+        const employeeTwo = bringEmployee(employeeNameTwo.toUpperCase())
         const daysMatched = compareDays(employeeOne,employeeTwo);
         const ocurrences = compareTimes(daysMatched);
         console.log(`COINCIDENCIAS EN LA OFICINA ENTRE ${nameOne.toUpperCase()} y ${nameTwo.toUpperCase()}: ${ocurrences}`);
@@ -143,6 +146,7 @@ const compareAllTimetable = () =>{
             
             console.log(`${ocurrences} COINCIDENCIAS:       ${nameOne} y ${nameTwo}`)
         }
+        console.log("FIN")
 
     }catch(error){
         console.log("El programa no pudo seguir corriendo debido a un error.")
@@ -150,16 +154,11 @@ const compareAllTimetable = () =>{
 }
 
 module.exports = {
-    bringEmployee, checkNames, compareDays,
-
-    compareAllTimetable, compareTimetable, getAllNames
+    bringEmployee,
+    checkNames, 
+    compareDays,
+    compareAllTimetable, 
+    compareTimetable, 
+    getAllNames
 }
-
-
-// Instalar node@latest LTS
-// Instalar Jest para testing
-// Correr en consola
-// npm run compareall
-// npm run compare <nombre1> <nombre2>
-// npm run getnames
 
