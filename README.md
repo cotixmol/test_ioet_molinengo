@@ -7,7 +7,8 @@
 <p>2. <a href=#data-structure>Data Structure</a></p>
 <p>3. <a href=#node>Node.js Project</a></p>
 <p>4. <a href=#app>Application Execution</a></p>
-<p>5. <a href=#code>App Code: technical design of functions</a></p>
+<p>5. <a href=#test>Jest testing</a></p>
+<p>6. <a href=#code>App Code: technical design of functions</a></p>
 
 <h2 name="introduction">Introduction</h2>
 It was requested by the recruiting team from <strong>Ioet</strong> to develop an application able to identify the number of times two persons share the same time in an office in a week.
@@ -93,6 +94,20 @@ In the project directory is a "package.json" file where all the dependencies are
 `npm run compare <name1> <name2>` : Shows a message indicating the number of times both employees are in the office at the same time. The names could be written in lower, upper or any case format. Example: `npm run compare astrid andres`
 
 `npm run compareall` : Show all the possible pair-combination of all employees listed on "employees.txt" and the amount of times they share time in the office.
+
+<h2 name="test">Jest Testing</h2>
+<p>The jest library for unit testing was used to test the code with the next considerations:</p>
+<ul>
+<li>The main testing file is located on "/test/ioet.test.js"</li>
+<li>The testing was made using variables asigned in the same file in order to easy change the inputs and expected results</li>
+<li>The testing uses variables returned from executing function in the same file.</li>
+<li>The test uses a library function call <strong>test() which takes two parameters</strong>.
+    <ol>
+        <li>The title of the test, in any string value.</li>
+        <li>A callback function with no parameters using a inner expect() function with a value expected expected to be compared with the rules of the method that follows the function. For example: expected(value).toBe(1). There are several methods. </li>
+    </ol>
+<li>The test can be run using the `npm test` command</li>
+</li>
 
 <h2 name="code">App Code: technical design of functions</h2>
     

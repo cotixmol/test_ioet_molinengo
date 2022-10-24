@@ -115,7 +115,7 @@ const getAllNames = () => {
     }
 }
 const compareTimetable = (employeeNameOne,employeeNameTwo) =>{
-    // try{
+    try{
         const employeeOne = bringEmployee(employeeNameOne.toUpperCase());
         const employeeTwo = bringEmployee(employeeNameTwo.toUpperCase())
         const daysMatched = compareDays(employeeOne,employeeTwo);
@@ -123,10 +123,10 @@ const compareTimetable = (employeeNameOne,employeeNameTwo) =>{
         console.log(`COINCIDENCIAS EN LA OFICINA ENTRE ${employeeNameOne.toUpperCase()} y ${employeeNameTwo.toUpperCase()}: ${ocurrences}`);
         return "FIN"
 
-    // }catch(error){
-    //     console.log("El programa no pudo seguir corriendo debido a un error.\n");
-    //     return "ERROR"
-    // }
+    }catch(error){
+        console.log("El programa no pudo seguir corriendo debido a un error.\n");
+        return "ERROR"
+    }
 }
 const compareAllTimetable = () =>{
     try{
