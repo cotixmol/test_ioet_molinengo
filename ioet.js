@@ -139,11 +139,8 @@ const compareAllTimetable = () =>{
 
             const employeeOne = bringEmployee(nameOne)
             const employeeTwo = bringEmployee(nameTwo)
-        
             const daysMatched = compareDays(employeeOne,employeeTwo);
-        
             const ocurrences = compareTimes(daysMatched);
-            
             console.log(`${ocurrences} COINCIDENCIAS:       ${nameOne} y ${nameTwo}`)
         }
         console.log("FIN")

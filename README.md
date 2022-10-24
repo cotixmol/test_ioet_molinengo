@@ -91,46 +91,52 @@ In the project directory is a "package.json" file where all the dependencies are
     
 In the main directory of the project there is a file called "ioet.js". In that file are the 10 functions that run this application. These functions are:
 
-<h3>1) bringEmployee(employeeName)</h3>
-<p>This function takes as an argument the name of an employee. From there, uses the <strong>FileSystem module native from Node.js</strong> to synchronously read "employees.txt" and asign it to a variable called employeesFile.</p>
-<p>From there the app uses the <strong>JSON.parse( ) method</strong> to convert the variable employeesFile into an array and assign it to a variable call employeesArray.
-<p>Next, the function uses the <strong>array.filter( ) method</strong> to return from employeesArray the element whose name value is equal to the argument's one and assign it to a variable called employeeArray. <strong>This last variable is returned from the function</strong> if everything works as expected.</p>
-<p>Finally, all the functionality detailed above is inside a <strong>try...catch block</strong> to catch the only possible error; which is a ReferenceError if the file name is wrong or missing.</p>
+<details>
+    <summary><h3>1) bringEmployee(employeeName)</h3></summary>
+    <p>This function takes as an argument the name of an employee. From there, uses the <strong>FileSystem module native from Node.js</strong> to synchronously read "employees.txt" and asign it to a variable called employeesFile.</p>
+    <p>From there the app uses the <strong>JSON.parse( ) method</strong> to convert the variable employeesFile into an array and assign it to a variable call employeesArray.
+    <p>Next, the function uses the <strong>array.filter( ) method</strong> to return from employeesArray the element whose name value is equal to the argument's one and assign it to a variable called employeeArray. <strong>This last variable is returned from the function</strong> if everything works as expected.</p>
+    <p>Finally, all the functionality detailed above is inside a <strong>try...catch block</strong> to catch the only possible error; which is a ReferenceError if the file name is wrong or missing.</p>
+</details>
 
-<h3>2) compareDays(employeeOneArray,employeeTwoArray)</h3>
-<p>This function uses as parameters two arrays each returned from an execution of function 1.</p>
-<p>Firstly, new create a empty object using <strong>new Object( ) instantiation</strong> and we asign it to a variable called <strong>daysMatched</strong>, which the app will use to save the days and times two employees matches.</p>
-<p>Then, we use the function number 3, which returns true or false whether the arrays are correct or not and asign that <strong>boolean value the variable namesChecked.</strong><p>
-<p>If the value of namesChecked is true, it the the app starts to enter values to the variable called daysMatched. It does this by executing a <strong>for loop</strong> which iterates through <strong>the days of an array called daysOfWeek</strong> defined at the beginning of the code.</p> 
-<p>Inside the iteration, there's an if-else condition which does the next:</p>
-<ol>
-    <li>If <strong>any of the two arguments of the function returns falsy values in the object key "day"</strong>, it means on that day, one of the employees do not have time schedule at office. Making imposible for them to coincide. Then the iteration jumps to other day.</li>
-    <li>If both have time schedules thay day, both have truthy values and the iteration runs the else block. 
-    <li>Inside the <strong>else block</strong>, there's function 4, which checks whether the schedule time format is correct for both employees and returns an <strong>Array of time values that is assigned to the variable times</strong>.</li>
-    <li>Finally we insert inside the <strong>daysMatched object</strong> a key:value pair, being <strong>key=day and value=times.</strong> At the end of the iteration this object contains the days both employees were at office and their entry and exit time (Array returned from function 4).</li>
-</ol>
-<p>After the iteration is finished, the function <strong>returns the object DaysMatched</strong>
-<p>Also there is in this function <strong>error handlers if the time schedule are wrong formated in "employees.txt"</strong> and <strong>log messages if the function 3 returns false (meaning the user wrote the names incorrectly)</p>    
-<h3>3) checkNames(employeeOneArray,employeeTwoArray)</h3>
-<p>The function takes as argument two arrays with the object of each employee.</p>
-<p>Inside the function has <strong>two conditions the arrays must fullfil:</strong>.</p>
-<p>The first <strong>transforms each array into a string using the JSON.stringify( ) method</strong> and compare if they are equals. If they do, it means the user tried to compare the same person. <strong>Boolean assigned to the variable conditionA.</strong></p>
-<p>The second <strong>checks if one or both arrays are falsy.</strong> If one array is falsy it means that the person name is not listed in "employees.txt", therefore it does not exist. <strong>Boolean assigned to the variable conditionA.</strong></p>
+<details>
+    <summary><h3>2) compareDays(employeeOneArray,employeeTwoArray)</h3></summary>
+    <p>This function uses as parameters two arrays each returned from an execution of function 1.</p>
+    <p>Firstly, new create a empty object using <strong>new Object( ) instantiation</strong> and we asign it to a variable called <strong>daysMatched</strong>, which the app will use to save the days and times two employees matches.</p>
+    <p>Then, we use the function number 3, which returns true or false whether the arrays are correct or not and asign that <strong>boolean value the variable namesChecked.</strong><p>
+    <p>If the value of namesChecked is true, it the the app starts to enter values to the variable called daysMatched. It does this by executing a <strong>for loop</strong> which iterates through <strong>the days of an array called daysOfWeek</strong> defined at the beginning of the code.</p> 
+    <p>Inside the iteration, there's an if-else condition which does the next:</p>
+    <ol>
+        <li>If <strong>any of the two arguments of the function returns falsy values in the object key "day"</strong>, it means on that day, one of the employees do not have time schedule at office. Making imposible for them to coincide. Then the iteration jumps to other day.</li>
+        <li>If both have time schedules thay day, both have truthy values and the iteration runs the else block. 
+        <li>Inside the <strong>else block</strong>, there's function 4, which checks whether the schedule time format is correct for both employees and returns an <strong>Array of time values that is assigned to the variable times</strong>.</li>
+        <li>Finally we insert inside the <strong>daysMatched object</strong> a key:value pair, being <strong>key=day and value=times.</strong> At the end of the iteration this object contains the days both employees were at office and their entry and exit time (Array returned from function 4).</li>
+    </ol>
+    <p>After the iteration is finished, the function <strong>returns the object DaysMatched</strong>
+    <p>Also there is in this function <strong>error handlers if the time schedule are wrong formated in "employees.txt"</strong> and <strong>log messages if the function 3 returns false (meaning the user wrote the names incorrectly)</p>    
+    <h3>3) checkNames(employeeOneArray,employeeTwoArray)</h3>
+    <p>The function takes as argument two arrays with the object of each employee.</p>
+    <p>Inside the function has <strong>two conditions the arrays must fullfil:</strong>.</p>
+    <p>The first <strong>transforms each array into a string using the JSON.stringify( ) method</strong> and compare if they are equals. If they do, it means the user tried to compare the same person. <strong>Boolean assigned to the variable conditionA.</strong></p>
+    <p>The second <strong>checks if one or both arrays are falsy.</strong> If one array is falsy it means that the person name is not listed in "employees.txt", therefore it does not exist. <strong>Boolean assigned to the variable conditionA.</strong></p>
+    <p>Finally the function check whether the boolean variables asigned to the conditions are true or false. From there, it logs different error messages and returns false boolean values. The value returned is <strong>true only when both conditions are false.</strong></p>
+</details>
 
-<p>Finally the function check whether the boolean variables asigned to the conditions are true or false. From there, it logs different error messages and returns false boolean values. The value returned is <strong>true only when both conditions are false.</strong>
+<details>
+    <summary><h3>4) checkTimes(employeeOneArray,employeeTwoArray,day)</h3></summary>
+    <p>This function is inside the iteration of function 2. Takes three arguments, the arrays from each employee and the day corresponding to the iterating process inside function 2.</p>
+    <p>The whole function 4 is a <strong>try...catch block</strong>. By getting inside the value of the object key "day" in each employee array we <strong>receive a string with the format "HH:MM-HH:MM".</strong> To get each hour in the format "HH:MM" the app uses the <strong>string.split() method</strong>. From there we have the possibility to extract four time strings that will be assign the to <strong>employeeOneStartTime, employeeOneEndTime, employeeTwoStartTime and employeeTwoEndTime.</strong></p>
+    <p>The conditions that are tested for this four variables are:</p>
+    <ul>
+        <li>The lenght of the string es equal to 5 ("HH:MM").</li>
+        <li>The string value is not greater than "23:59".<strong> Sidenote: This strings representing hours behaves well in greater-less comparison</strong></li>
+    </ul>
+    <p>If both conditions are fullfil for the four variables, it <strong>returns the variables as an array. Assign it to a variable call times and return it from the function.</strong></p> If any of the conditions is false, a message is log indicating the error, and a error is thrown to stop the execution of the app by the use of future try...catch blocks.</p>
+</details>
 
-<h3>4) checkTimes(employeeOneArray,employeeTwoArray,day)</h3>
-<p>This function is inside the iteration of function 2. Takes three arguments, the arrays from each employee and the day corresponding to the iterating process inside function 2.</p>
-<p>The whole function 4 is a <strong>try...catch block</strong>. By getting inside the value of the object key "day" in each employee array we <strong>receive a string with the format "HH:MM-HH:MM".</strong> To get each hour in the format "HH:MM" the app uses the <strong>string.split() method</strong>. From there we have the possibility to extract four time strings that will be assign the to <strong>employeeOneStartTime, employeeOneEndTime, employeeTwoStartTime and employeeTwoEndTime.</strong></p>
-<p>The conditions that are tested for this four variables are:</p>
-<ul>
-    <li>The lenght of the string es equal to 5 ("HH:MM").</li>
-    <li>The string value is not greater than "23:59".<strong> Sidenote: This strings representing hours behaves well in greater-less comparison</strong></li>
-</ul>
-<p>If both conditions are fullfil for the four variables, it <strong>returns the variables as an array. Assign it to a variable call times and return it from the function.</strong></p> If any of the conditions is false, a message is log indicating the error, and a error is thrown to stop the execution of the app by the use of future try...catch blocks.
-
-<h3>5) compareTimes(daysMatches)</h3>
-<p>This function uses as argument the return of function 2. Let's remember daysMatched from function 2 is an object with the following structure:</p>
+<details>
+    <summary><h3>5) compareTimes(daysMatches)</h3></summary>
+    <p>This function uses as argument the return of function 2. Let's remember daysMatched from function 2 is an object with the following structure:</p>
 
 ```
 {
@@ -150,8 +156,11 @@ In the main directory of the project there is a file called "ioet.js". In that f
 </ul>
 <p>We declare these two conditions <strong>inside an if...else block.</strong> using the variables asigned above. <strong>If both variables are true</strong>, it means they work at the same time that day and the app does nothing. <strong>If any of them or both are false</strong>, it means that day the did not see each other at work, and the function reduce the number of ocurrences by 1.</p>
 <p>The function does this for every day in the daysOfWeek array, and <strong>return the ocurrences variable.</strong></p>
+</details>
 
-<h3>6) compareTimetable(employeeNameOne,employeeNameTwo)</h3>
+<details>
+    <summary><h3>6) compareTimetable(employeeNameOne,employeeNameTwo)</h3></summary>
+
 <p>This function contains a <strong>try...catch block</strong> in charge of running the above explained functions as shown:</p>
 
 ```
@@ -163,6 +172,9 @@ In the main directory of the project there is a file called "ioet.js". In that f
 
 <p> If everything works as intended it <strong>displays a log message with the time of ocurrences between two employees selected.</strong></p>
 
+<details>
+    <summary></summary>
+</details>
 <h3>7) compareAllTimetable( )</h3>
 <p>This is the first function of the application that takes no arguments. It is in charge of showing all the possible combination of two employees and the amount of times they share office in a week. It is an extension of function 6.</p>
 <p>Inside a <strong>try...catch block</strong> the function start by using function 8 in charge of returning an array with all the names from the "employees.txt" file and asigning it to a <strong>variable called employeesNamesArray.</strong></p>
@@ -179,14 +191,20 @@ In the main directory of the project there is a file called "ioet.js". In that f
 ```
 
 <p>This array is used in a <strong>for loop</strong> which uses the two names of each element and the lenght of the array to contruct the for structure. Inside the for loop <strong>the function extract the two names of each element using string.split() method</strong>. Finally, the function works in the exact same way as function 6 logging on the console the number of ocurrences for each pair.</p>
+</details>
 
-<h3>8) getAllNames( )</h3>
+<details>
+    <summary><h3>8) getAllNames( )</h3></summary>
+
 <p>This function uses the <strong>FileSystem module native from Node.js</strong> to synchronously read "employees.txt" and asign it to a variable called employeesFile</p>
 <p>From there the app uses the <strong>JSON.parse( ) method</strong> to convert the variable employeesFile into an array and assign it to a variable call employeesArray.
 <p>Next, by the <strong>array.map( ) method</strong> we generate a new array with the names of all the employees and <strong>assign it to a variable called employeesNamesArray.</strong> This last variable is returned from the function.</p>  
 <p>Finally, all the functionality detailed above is inside a <strong>try...catch block</strong> to catch the only possible error; which is a ReferenceError if the file name is wrong or missing.</p>
+</details>
 
-<h3>9) getPairOfNames(employeesNamesArray)</h3>
+<details>
+    <summary><h3>9) getPairOfNames(employeesNamesArray)</h3></summary>
+
 <p>This function takes as an argument the array returned from function 8 and return <strong>an array with all the possible pair combinations</strong>.</p>
 <p>In plain words this function takes the first name of and array and concat next to it the names that follow it. Then it takes the second name and concat only the ones that follow it and so on. For example:</p>
 
@@ -219,6 +237,7 @@ const pairOfNamesArray = [].concat(...employeesNamesArray.map(
     <li><strong>The first .map( )</strong> repeats step 5 with the the next element in the ...employeesNameArray. And the <strong>second .map( )</strong> iterates over the elements who follow it as explain in step 6 and 7.</li>
     <li>This process is repeated until the first .map( ) reaches the last element inside ...employeesNameArray and the second .map( )has nothing else to iterate through.</li>
 </ol>
+</details>
     
 <h3>End of documentation</h3>
 <h1>Constancio Molinengo</h1>
