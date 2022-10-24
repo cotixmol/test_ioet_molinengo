@@ -106,7 +106,10 @@ In the project directory is a "package.json" file where all the dependencies are
         <li>The title of the test, in any string value.</li>
         <li>A callback function with no parameters using a inner expect() function with a value expected expected to be compared with the rules of the method that follows the function. For example: expected(value).toBe(1). There are several methods. </li>
     </ol>
-<li>The test can be run using the `npm test` command</li>
+The test can be run using the command:
+
+`npm test` : run the 5 test in the file.
+
 </li>
 
 <h2 name="code">App Code: technical design of functions</h2>
