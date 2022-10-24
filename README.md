@@ -139,6 +139,7 @@ In the main directory of the project there is a file called "ioet.js". In that f
     <ul>
         <li>The lenght of the string es equal to 5 ("HH:MM").</li>
         <li>The string value is not greater than "23:59".<strong> Sidenote: This strings representing hours behaves well in greater-less comparison</strong></li>
+        <li>The end time of any employee is greater and the start time.</li>
     </ul>
     <p>If both conditions are fullfil for the four variables, it <strong>returns the variables as an array. Assign it to a variable call times and return it from the function.</strong></p> If any of the conditions is false, a message is log indicating the error, and a error is thrown to stop the execution of the app by the use of future try...catch blocks.</p>
 </details>
