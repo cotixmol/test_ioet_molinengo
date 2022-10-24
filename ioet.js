@@ -43,8 +43,10 @@ const checkTimes = (employeeOneArray,employeeTwoArray,day) =>{
         const conditionB = (employeeOneEndTime.length===5 && employeeOneEndTime<"23:59");
         const conditionC = (employeeTwoStartTime.length===5 && employeeTwoStartTime<"23:59");
         const conditionD = (employeeTwoEndTime.length===5 && employeeTwoEndTime<"23:59");
+        const conditionE = (employeeOneEndTime>employeeOneStartTime)
+        const conditionF = (employeeTwoEndTime>employeeTwoStartTime)
     
-        if (conditionA && conditionB && conditionC && conditionD){
+        if (conditionA && conditionB && conditionC && conditionD && conditionE & conditionF){
             const times = [employeeOneStartTime,employeeOneEndTime,employeeTwoStartTime,employeeTwoEndTime]
             return times
         }else{
@@ -113,18 +115,18 @@ const getAllNames = () => {
     }
 }
 const compareTimetable = (employeeNameOne,employeeNameTwo) =>{
-    try{
+    // try{
         const employeeOne = bringEmployee(employeeNameOne.toUpperCase());
         const employeeTwo = bringEmployee(employeeNameTwo.toUpperCase())
         const daysMatched = compareDays(employeeOne,employeeTwo);
         const ocurrences = compareTimes(daysMatched);
-        console.log(`COINCIDENCIAS EN LA OFICINA ENTRE ${nameOne.toUpperCase()} y ${nameTwo.toUpperCase()}: ${ocurrences}`);
+        console.log(`COINCIDENCIAS EN LA OFICINA ENTRE ${employeeNameOne.toUpperCase()} y ${employeeNameTwo.toUpperCase()}: ${ocurrences}`);
         return "FIN"
 
-    }catch(error){
-        console.log("El programa no pudo seguir corriendo debido a un error.\n");
-        return "ERROR"
-    }
+    // }catch(error){
+    //     console.log("El programa no pudo seguir corriendo debido a un error.\n");
+    //     return "ERROR"
+    // }
 }
 const compareAllTimetable = () =>{
     try{
