@@ -114,14 +114,16 @@ In the main directory of the project there is a file called "ioet.js". In that f
     </ol>
     <p>After the iteration is finished, the function <strong>returns the object DaysMatched</strong>
     <p>Also there is in this function <strong>error handlers if the time schedule are wrong formated in "employees.txt"</strong> and <strong>log messages if the function 3 returns false (meaning the user wrote the names incorrectly)</p>    
-    <h3>3) checkNames(employeeOneArray,employeeTwoArray)</h3>
+</details>
+
+<details>
+ <summary><h3>3) checkNames(employeeOneArray,employeeTwoArray)</h3></summary>
     <p>The function takes as argument two arrays with the object of each employee.</p>
     <p>Inside the function has <strong>two conditions the arrays must fullfil:</strong>.</p>
     <p>The first <strong>transforms each array into a string using the JSON.stringify( ) method</strong> and compare if they are equals. If they do, it means the user tried to compare the same person. <strong>Boolean assigned to the variable conditionA.</strong></p>
     <p>The second <strong>checks if one or both arrays are falsy.</strong> If one array is falsy it means that the person name is not listed in "employees.txt", therefore it does not exist. <strong>Boolean assigned to the variable conditionA.</strong></p>
     <p>Finally the function check whether the boolean variables asigned to the conditions are true or false. From there, it logs different error messages and returns false boolean values. The value returned is <strong>true only when both conditions are false.</strong></p>
 </details>
-
 <details>
     <summary><h3>4) checkTimes(employeeOneArray,employeeTwoArray,day)</h3></summary>
     <p>This function is inside the iteration of function 2. Takes three arguments, the arrays from each employee and the day corresponding to the iterating process inside function 2.</p>
