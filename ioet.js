@@ -18,7 +18,7 @@ const checkNames = (employeeOneArray,employeeTwoArray) =>{
         const conditionB = (employeeOneArray == false || employeeTwoArray == false); 
         
         if(conditionA && conditionB){
-            console.log("Ingresar nombres de empleados validos");
+            console.log("Ingresar id de empleados validos");
             return false;
     
         }else if(conditionA){
@@ -139,7 +139,7 @@ const compareTimetable = (employeeIdOne,employeeIdTwo) =>{
         const employeeTwo = bringEmployee(employeeIdTwo)
         const daysMatched = compareDays(employeeOne,employeeTwo);
         const ocurrences = compareTimes(daysMatched);
-        console.log(`COINCIDENCIAS EN LA OFICINA ENTRE ID ${employeeOne[0].id}: ${employeeOne[0].name} y ID ${employeeTwo[0].id}: ${employeeTwo[0].name}: ${ocurrences}`);
+        console.log(`COINCIDENCIAS EN LA OFICINA ENTRE ID ${employeeOne[0].id}: ${employeeOne[0].name} y ID ${employeeTwo[0].id}: ${employeeTwo[0].name}: ${ocurrences} COINCIDENCIAS`);
         return "FIN"
 
     }catch(error){
