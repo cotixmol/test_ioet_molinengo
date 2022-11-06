@@ -1,36 +1,42 @@
-const fs = require("fs")
+const EmployeeClass = require("./class.js");
+let Employee = EmployeeClass.Employee;
+
 const daysOfWeek = ["monday","tuesday","wednesday","thursday","friday","saturday","sunday"]
 
-const bringEmployee = (employeeName) => {
+const bringEmployee = (employeeId) => {
     try{
-        const employeesFile = fs.readFileSync("./employees.txt","utf-8")
-        const employeesArray = JSON.parse(employeesFile)
-        const employeeArray = employeesArray.filter((elm) => elm.name === employeeName)
+        const employeesArray = Employee.employeesArray;
+        const employeeArray = employeesArray.filter((elm) => elm.id === parseInt(employeeId))
         return employeeArray
     }catch(ReferenceError){
-        console.log("El Archivo 'employees.txt' no fue encontrado en el directorio local")
+        console.log("La clase Employee no fue importada correctamente")
     }
 }
 const checkNames = (employeeOneArray,employeeTwoArray) =>{
-
-    const conditionA = (JSON.stringify(employeeOneArray) === JSON.stringify(employeeTwoArray));
-    const conditionB = (employeeOneArray == false || employeeTwoArray == false); 
+    try{
+        const conditionA = ((employeeOneArray[0].id) === (employeeTwoArray[0].id));
+        const conditionB = (employeeOneArray == false || employeeTwoArray == false); 
+        
+        if(conditionA && conditionB){
+            console.log("Ingresar nombres de empleados validos");
+            return false;
     
-    if(conditionA && conditionB){
-        console.log("Ingresar nombres de empleados validos");
-        return false;
-
-    }else if(conditionA){
-        console.log("No se puede comparar a la misma persona");
-        return false;
-
-    }else if(conditionB){
-        console.log("Una o ambas personas no existen");
-        return false;
-
-    }else{
-        return true;
+        }else if(conditionA){
+            console.log("No se puede comparar a la misma persona");
+            return false;
+    
+        }else if(conditionB){
+            console.log("Una o ambas personas no existen");
+            return false;
+    
+        }else{
+            return true;
+        }
+    }catch{
+        console.log("Hubo un error al revisar los nombres")
+        return false
     }
+
 }
 const checkTimes = (employeeOneArray,employeeTwoArray,day) =>{    
     try{
@@ -84,10 +90,10 @@ const compareTimes = (daysMatched) =>{
 
         if (daysMatched[day] === undefined){}
         else{
-            employeeOneStartTime = daysMatched[day][0]
-            employeeOneEndTime = daysMatched[day][1]
-            employeeTwoStartTime = daysMatched[day][2]
-            employeeTwoEndTime = daysMatched[day][3]
+            let employeeOneStartTime = daysMatched[day][0]
+            let employeeOneEndTime = daysMatched[day][1]
+            let employeeTwoStartTime = daysMatched[day][2]
+            let employeeTwoEndTime = daysMatched[day][3]
             
             if (employeeOneEndTime>=employeeTwoStartTime && employeeTwoEndTime>=employeeOneStartTime){
             }else{
@@ -97,30 +103,43 @@ const compareTimes = (daysMatched) =>{
     }
     return ocurrences
 }
-const getPairOfNames = (employeesNamesArray) => {
-    const pairOfNamesArray = [].concat(...employeesNamesArray.map( (elm, index) => 
-        employeesNamesArray.slice(index+1).map((elm2) => 
+const getPairOfIds = (employeesIdsArray) => {
+    const pairOfIdsArray = [].concat(...employeesIdsArray.map( (elm, index) => 
+        employeesIdsArray.slice(index+1).map((elm2) => 
             elm + ' ' + elm2 )));
-    return pairOfNamesArray
+    return pairOfIdsArray
 }
-
-const getAllNames = () => {
+const getAllIds = () => {
     try{
-        const employeesFile = fs.readFileSync("./employees.txt","utf-8")
-        const employeesArray = JSON.parse(employeesFile)
-        const employeesNamesArray = employeesArray.map((elm) => elm.name)
-        return employeesNamesArray; 
+        const employeesArray = Employee.employeesArray;
+        const employeesIdArray = employeesArray.map((elm) => elm.id)
+        return employeesIdArray; 
     }catch(ReferenceError){
-        console.log("El Archivo 'employees.txt' no fue encontrado en el directorio local")
+        console.log("Hubo un error en la configuracion de la clase Employees")
     }
 }
-const compareTimetable = (employeeNameOne,employeeNameTwo) =>{
+
+const getInfo = () => {
     try{
-        const employeeOne = bringEmployee(employeeNameOne.toUpperCase());
-        const employeeTwo = bringEmployee(employeeNameTwo.toUpperCase())
+        const employeesArray = Employee.employeesArray;
+        const employeesInfoArray = []
+        for (let i=0;i<employeesArray.length;i++){
+            let infoEmployee = (`ID ${employeesArray[i].id}: ${employeesArray[i].name}`)
+            employeesInfoArray.push(infoEmployee)
+        }
+    return(employeesInfoArray)
+
+    }catch(ReferenceError){
+        console.log("Hubo un error en la configuracion de la clase Employees")
+    }
+}
+const compareTimetable = (employeeIdOne,employeeIdTwo) =>{
+    try{
+        const employeeOne = bringEmployee(employeeIdOne);
+        const employeeTwo = bringEmployee(employeeIdTwo)
         const daysMatched = compareDays(employeeOne,employeeTwo);
         const ocurrences = compareTimes(daysMatched);
-        console.log(`COINCIDENCIAS EN LA OFICINA ENTRE ${employeeNameOne.toUpperCase()} y ${employeeNameTwo.toUpperCase()}: ${ocurrences}`);
+        console.log(`COINCIDENCIAS EN LA OFICINA ENTRE ID ${employeeOne[0].id}: ${employeeOne[0].name} y ID ${employeeTwo[0].id}: ${employeeTwo[0].name}: ${ocurrences}`);
         return "FIN"
 
     }catch(error){
@@ -130,20 +149,19 @@ const compareTimetable = (employeeNameOne,employeeNameTwo) =>{
 }
 const compareAllTimetable = () =>{
     try{
+        const employeesIdsArray = getAllIds()
+        const pairOfIdsArray = getPairOfIds(employeesIdsArray)
 
-        const employeesNamesArray = getAllNames()
-        const pairOfNamesArray = getPairOfNames(employeesNamesArray)
+        for (let i=0;i<pairOfIdsArray.length;i++){
 
-        for (let i=0;i<pairOfNamesArray.length;i++){
+            const IdOne = (pairOfIdsArray[i].split(" "))[0]
+            const IdTwo = (pairOfIdsArray[i].split(" "))[1]
 
-            const nameOne = (pairOfNamesArray[i].split(" "))[0]
-            const nameTwo = (pairOfNamesArray[i].split(" "))[1]
-
-            const employeeOne = bringEmployee(nameOne)
-            const employeeTwo = bringEmployee(nameTwo)
+            const employeeOne = bringEmployee(IdOne)
+            const employeeTwo = bringEmployee(IdTwo)
             const daysMatched = compareDays(employeeOne,employeeTwo);
             const ocurrences = compareTimes(daysMatched);
-            console.log(`${ocurrences} COINCIDENCIAS:       ${nameOne} y ${nameTwo}`)
+            console.log(`${ocurrences} COINCIDENCIAS:       ID ${employeeOne[0].id}: ${employeeOne[0].name} y ID ${employeeTwo[0].id}: ${employeeTwo[0].name}`)
         }
         console.log("FIN")
 
@@ -154,10 +172,9 @@ const compareAllTimetable = () =>{
 
 module.exports = {
     bringEmployee,
-    checkNames, 
+    checkNames,
     compareDays,
-    compareAllTimetable, 
-    compareTimetable, 
-    getAllNames
+    compareTimetable,
+    compareAllTimetable,
+    getInfo
 }
-

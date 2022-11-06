@@ -1,47 +1,47 @@
-const { bringEmployee, checkNames, compareDays, compareTimetable } = require("../ioet.js");
+const testFunctions = require("../ioet")
 
 //To test, make sure both names are in the file employees.txt.
-const employeeName1 = "CONSTANCIO"
-const employeeName2 = "JULIA"
+const employeeId1 = 1
+const employeeId2 = 2
 
-const notEmployeeName1 = "NOTEXISTINGNAME1"
-const notEmployeeName2 = "NOTEXISTINGNAME2"
+const notEmployeeId1 = 10000000000000
+const notEmployeeId2 = 10000000000001
 
-const employeeName1Array = bringEmployee(employeeName1);
-const employeeName2Array = bringEmployee(employeeName2);
-const notEmployeeName1Array = bringEmployee(notEmployeeName1);
-const notEmployeeName2Array = bringEmployee(notEmployeeName2);
+const employeeId1Array = testFunctions.bringEmployee(employeeId1);
+const employeeId2Array = testFunctions.bringEmployee(employeeId2);
+const notEmployeeId1Array = testFunctions.bringEmployee(notEmployeeId1);
+const notEmployeeId2Array = testFunctions.bringEmployee(notEmployeeId2);
 const employeeEmpty = [];
 
 test("bringEmployee function returns Array-Object", ()=>{
-    const employeeObj = bringEmployee(employeeName1);
-    expect(employeeObj[0].name).toEqual(employeeName1)
+    const employeeObj = testFunctions.bringEmployee(employeeId1);
+    expect(employeeObj[0].id).toEqual(employeeId1)
 });
 test("bringEmployee function returns empty array", ()=>{
-    const employeeEmpty = bringEmployee();
+    const employeeEmpty = testFunctions.bringEmployee();
     expect(employeeEmpty).toEqual([]);
 });
 test("checkNames returns true or false if employeeOne and employeeTwo are valid or not", ()=>{
-    expect(checkNames(employeeEmpty,employeeEmpty)).toBe(false);
-    expect(checkNames(employeeEmpty,employeeName1Array)).toBe(false);
+    expect(testFunctions.checkNames(employeeEmpty,employeeEmpty)).toBe(false);
+    expect(testFunctions.checkNames(employeeEmpty,employeeId1Array)).toBe(false);
 
-    expect(checkNames(employeeName1Array,employeeEmpty)).toBe(false);
-    expect(checkNames(employeeName1Array,employeeName1Array)).toBe(false);
+    expect(testFunctions.checkNames(employeeId1Array,employeeEmpty)).toBe(false);
+    expect(testFunctions.checkNames(employeeId1Array,employeeId1Array)).toBe(false);
 
-    expect(checkNames(notEmployeeName1Array,notEmployeeName2Array)).toBe(false);
-    expect(checkNames(false,false)).toBe(false);
+    expect(testFunctions.checkNames(employeeId1Array,notEmployeeId2Array)).toBe(false);
+    expect(testFunctions.checkNames(false,false)).toBe(false);
 
-    expect(checkNames(employeeName1Array,employeeName2Array)).toBe(true)
+    expect(testFunctions.checkNames(employeeId1Array,employeeId2Array)).toBe(true)
 
 });
 test("compareDays returns day that employees matched",()=>{
-    expect(compareDays(employeeName1Array,employeeName2Array)).toBeTruthy();
-    expect(compareDays(notEmployeeName1Array,notEmployeeName2Array)).toEqual(undefined);
+    expect(testFunctions.compareDays(employeeId1Array,employeeId2Array)).toBeTruthy();
+    expect(testFunctions.compareDays(notEmployeeId1Array,notEmployeeId2Array)).toEqual(undefined);
 })
 test("compareTimetable returns what expected",()=>{
-    const result = compareTimetable(employeeName1,employeeName2)
+    const result = testFunctions.compareTimetable(employeeId1,employeeId2)
     expect(result).toBe("FIN");
-    const notResult = compareTimetable(notEmployeeName1,notEmployeeName2)
+    const notResult = testFunctions.compareTimetable(notEmployeeId1,notEmployeeId2)
     expect(notResult).toBe("ERROR");
 })
 

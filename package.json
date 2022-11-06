@@ -1,11 +1,11 @@
 {
   "name": "ioet_molinengo",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "<h1>Test Ioet Molinengo</h1>",
   "main": "ioet.js",
   "scripts": {
     "test": "jest",
-    "getnames": "npx run-func ioet.js getAllNames",
+    "getinfo": "npx run-func ioet.js getInfo",
     "compareall": "npx run-func ioet.js compareAllTimetable",
     "compare": "npx run-func ioet.js compareTimetable"
   },
@@ -14,7 +14,7 @@
     "url": "git+https://github.com/cotixmol/test_ioet_molinengo.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Constancio Molinengo",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/cotixmol/test_ioet_molinengo/issues"
