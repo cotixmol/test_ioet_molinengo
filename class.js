@@ -8,7 +8,6 @@ class Employee {
         this.friday=friday;
         this.saturday=saturday;
         this.sunday=sunday;
-
     }
     
     static id = 0;
@@ -28,7 +27,13 @@ const employee4 = new Employee("JUAN CRUZ",{sunday:"10:00-17:00",thursday:"16:00
 const employee5 = new Employee("TOMAS",{monday:"15:00-20:00",wednesday:"10:00-18:00",thursday:"09:00-13:00",saturday:"15:00-19:00"})
 const employee6 = new Employee("MANUEL",{sunday:"17:00-20:00",thursday:"18:00-22:00",friday:"10:00-16:00",saturday:"08:00-12:00"})
 
-Employee.addEmployee([employee1,employee2,employee3,employee4,employee5,employee6])
+Employee.addEmployee([  employee1,
+                        employee2,
+                        employee3,
+                        employee4,
+                        employee5,
+                        employee6
+                    ])
 
 module.exports = {
     Employee: Employee
