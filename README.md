@@ -19,7 +19,7 @@ It was requested by the recruiting team from <strong>Ioet</strong> to develop an
 
 The data structure for this program is set inside a Class named "Employee". The class itself is defined ,instantiated and exported as a module in the file "ioet.js".
 
-Every instantiation asigns an object to an employee variable. Then, we push each of these objects to a static array named "employeesArray" that is defined inside the class Employee. The push is made by a method that also adds an "id" to each push, changing the "id" in each push.
+Every instantiation asigns an object to an employee variable. Then, we push each of these objects to a static array named "employeesArray" that is defined inside the class Employee. The push is made by a method of the class named "addEmployee()" that takes the object created by the class as a parameter. The method also adds an "id" to each push, changing the "id" in each push.
 
 The structure of "employeesArray", once instantiated the employee objects and pushed inside is as follows:
 
