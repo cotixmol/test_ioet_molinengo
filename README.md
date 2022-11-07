@@ -17,11 +17,14 @@ It was requested by the recruiting team from <strong>Ioet</strong> to develop an
 
 <h2 name="data-structure">Data Structure</h2>
 
-The data structure for this program is set inside a Class named "Employee". The class itself is defined ,instantiated and exported as a module in the file "ioet.js".
+<p>The data structure for this program is set by using a Class named "Employee". </p>
+<p>This class itself is defined ,instantiated and exported as a module in the file "ioet.js".</p>
 
-Every instantiation asigns an object to an employee variable. Then, we push each of these objects to a static array named "employeesArray" that is defined inside the class Employee. The push is made by a method of the class named "addEmployee()" that takes the object created by the class as a parameter. The method also adds an "id" to each push, changing the "id" in each push.
+<p>Every instantiation of the Employee class asigns an object to an employee variable.</p>
+<p>After instantiating every employee, we push each of these objects to a static array named "employeesArray" that is defined inside the class Employee.</p> 
+<p>The push is made by a static method of the class named "addEmployee()" that takes the employee object created as a parameter. The method also adds an "id" to each push, changing the "id" in each push.</p>
 
-The structure of "employeesArray", once instantiated the employee objects and pushed inside is as follows:
+<p>The structure of "employeesArray", once pushed every employee object it is as follows:</p>
 
 ```
 [
@@ -41,16 +44,11 @@ The structure of "employeesArray", once instantiated the employee objects and pu
 ]
 ```
 
-<br>
+<p>Each instantiation of the "Employee" class must be done as it follows:</p>
 
-Each instantiation of the "Employee" class must be done as it follows:
+`new Employee ("name",{day:"HH:MM-HH:MM",day:"HH:MM-HH:MM",...,...})`
 
-```
-new Employee ("name",{day:"HH:MM-HH:MM",day:"HH:MM-HH:MM",...,...})
-```
-
-<br>
-The instantiation contains different parameters applied to the class constructor. <strong>The only mandatory parameter is "name"</strong>. Setting the days and times are not mandatory. <strong>If the user do not define a specific day, by default the value of that day is and empty string.</strong>
+<p>This instantiation contains different parameters applied to the class constructor. <strong>The only mandatory parameter is "name"</strong>. Setting all days and times is not mandatory. <strong>If the user do not define a specific day, by default, the value of that day is and empty string.</strong></p>
 
 <h3>The values and key:values for the instantiation of the class.</h3>
 
@@ -67,8 +65,8 @@ The instantiation contains different parameters applied to the class constructor
 
 <h3>Rules for formatting the values in the Employee class instantiation</h3>
 
-The <strong>name value</strong> must be equal to a string.
-The <strong>day:time</strong> pairs must be formatted as it follows.
+<p>The <strong>name value</strong> must be equal to a string.
+The <strong>day:time</strong> pairs must be formatted as it follows.</p>
 `day:"HH:MM-HH:MM"`
 
 <ol>
@@ -80,7 +78,7 @@ The <strong>day:time</strong> pairs must be formatted as it follows.
 <li>For overnight duties the maximum time is 23:59 and the minimum time is 00:00.</li>
 </ol>
 
-<strong>Any mistake of these rules in the class instantiation will lead to unexpected results.</strong>
+<h3>Any mistake of these rules in the class instantiation will lead to unexpected results.</h3>
 
 <h2 name="node">Node.js Project</h2>
 The project is written in Javascript language over a Node.js LTS enviroment (v. 16.16.0) and using npm (v. 8.19.2).
