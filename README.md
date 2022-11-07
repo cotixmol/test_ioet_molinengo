@@ -1,8 +1,9 @@
 <h1>Test Ioet Constancio Molinengo</h1>
 
-<h1>Show the amount of times employees match in office.</h1>
+<h2>Show the amount of times two employees match in office.</h2>
 
 <h2>Content Table</h2>
+
 <p>1. <a href=#introduction>Introduction</a></p>
 <p>2. <a href=#data-structure>Data Structure</a></p>
 <p>3. <a href=#node>Node.js Project</a></p>
@@ -11,106 +12,123 @@
 <p>6. <a href=#code>App Code: technical design of functions</a></p>
 
 <h2 name="introduction">Introduction</h2>
-It was requested by the recruiting team from <strong>Ioet</strong> to develop an application able to identify the number of times two persons share the same time in an office in a week.
+
+It was requested by the recruiting team from <strong>Ioet</strong> to develop an application able to identify the number of times two employees share the same time gap in an office over an entire week.
 
 <h2 name="data-structure">Data Structure</h2>
-The data from the employees and for use in this project are located in a .txt file named "employees.txt" in the main directory of the project. The structure of this file is an array filled with different objects, each representing an employee, and organized as follows:
+
+The data structure for this program is set inside a Class named "Employee". The class itself is defined ,instantiated and exported as a module in the file "ioet.js".
+
+Every instantiation asigns an object to an employee variable. Then, we push each of these objects to a static array named "employeesArray" that is defined inside the class Employee. The push is made by a method that also adds an "id" to each push, changing the "id" in each push.
+
+The structure of "employeesArray", once instantiated the employee objects and pushed inside is as follows:
 
 ```
 [
-  {
-    "id":"1",
-    "name": "RENE",
-    "monday": "10:00-12:00",
-    "tuesday": "10:00-12:00",
-    "wednesday": "",
-    "thursday": "01:00-03:00",
-    "friday": "",
-    "saturday": "14:00-18:00",
-    "sunday": "20:00-21:00"
-  },
-  {...},
-  {...},
+	{
+	id:"1",
+	name: "RENE",
+	monday: "10:00-12:00",
+	tuesday: "10:00-12:00",
+	wednesday: "",
+	thursday: "01:00-03:00",
+	friday: "",
+	saturday: "14:00-18:00",
+	sunday: "20:00-21:00"
+	},
+	{...},
+	{...},
 ]
-
 ```
 
-<u>The structure MUST contain this different keys and values:</u>
+<br>
+
+Each instantiation of the "Employee" class must be done as it follows:
+
+```
+new Employee ("name",{day:"HH:MM-HH:MM",day:"HH:MM-HH:MM",...,...})
+```
+
+<br>
+The instantiation contains different parameters applied to the class constructor. <strong>The only mandatory parameter is "name"</strong>. Setting the days and times are not mandatory. <strong>If the user do not define a specific day, by default the value of that day is and empty string.</strong>
+
+<h3>The values and key:values for the instantiation of the class.</h3>
 
 <ul>
-    <li><strong>"id"</strong>: "string"</li>    
-    <li><strong>"name"</strong>: "string"</li>
-    <li><strong>"monday"</strong>: "string"</li>
-    <li><strong>"tuesday"</strong>: "string"</li>
-    <li><strong>"wednesday"</strong>: "string"</li>
-    <li><strong>"thursday"</strong>: "string"</li>
-    <li><strong>"friday"</strong>: "string"</li>
-    <li><strong>"saturday"</strong>: "string"</li>
-    <li><strong>"sunday"</strong>: "string"</li>
+	<li><strong>name</strong>: "string"</li>
+	<li><strong>monday</strong>: "string"</li>
+	<li><strong>tuesday</strong>: "string"</li>
+	<li><strong>wednesday</strong>: "string"</li>
+	<li><strong>thursday</strong>: "string"</li>
+	<li><strong>friday</strong>: "string"</li>
+	<li><strong>saturday</strong>: "string"</li>
+	<li><strong>sunday</strong>: "string"</li>
 </ul>
 
-<u>Rules for formatting data structure:</u>
+<h3>Rules for formatting the values in the Employee class instantiation</h3>
 
-<ul>
-    <li> The "id" value must be equal to a numeric string. These identify each object starting from 1 to infinite. </li>
-    <li> The "name" value must be equal to a string written in UPPER CASE</li>
-    <li> The value refering de 7 days of the week must be structure as this:</li>
-        <ol>
-            <li> Must be a string with this structure: "HH:MM-HH:MM". H refers to hour, M to minute. </li>
-            <li> The first "HH:MM" is the starting time for the current employee at the current day. </li>
-            <li> The second "HH:MM" is the ending time for the current employee at the current day. </li>
-            <li> For example: "monday": "10:00-18:00" means the employee works from 10am to 6pm.</li>
-            <li> For overmidnight duties the maximum time is 23:59 and the minimum time is 00:00.</li>
-        </ol>
-</ul>
+The <strong>name value</strong> must be equal to a string.
+The <strong>day:time</strong> pairs must be formatted as it follows.
+`day:"HH:MM-HH:MM"`
 
-<strong>Any mistake in the employees.txt file structure will lead to unexpected results.</strong>
+<ol>
+<li>The day key is one of the seven days of the week in lowercase.</li>
+<li>The first "HH:MM" is the starting time for the current employee in the current day.</li>
+<li>The second "HH:MM" is the ending time for the current employee in the current day.</li>
+<li>Between each "HH:MM" there must be a "-".</li>
+<li>For example: monday: "10:00-18:00" means the employee works from 10am to 6pm on Monday.</li>
+<li>For overnight duties the maximum time is 23:59 and the minimum time is 00:00.</li>
+</ol>
+
+<strong>Any mistake of these rules in the class instantiation will lead to unexpected results.</strong>
 
 <h2 name="node">Node.js Project</h2>
-
 The project is written in Javascript language over a Node.js LTS enviroment (v. 16.16.0) and using npm (v. 8.19.2).
 
-<p><u>Install dependencies and devDependencies.</u></p>
-In the project directory is a "package.json" file where all the dependencies are listed. At the current project there's the following:
+<h3>Install dependencies and devDependencies.</h3>
+
+In the project directory there is a "package.json" file where the dependencies used in the application are listed. These are:
+
 <ul>
-    <li><strong>run-func: 3.0.0:</strong> To execute a particular function in via console.</li>
-    <li><strong>jest: 29.2.1:</strong> Unit testing library.</li>
+	<li><strong>run-func: 3.0.0:</strong> To execute a particular function in via console.</li>
+	<li><strong>jest: 29.2.1:</strong> Unit testing library.</li>
 </ul>
-   
-<p>Install by the following commands in the project directory:</p>
+
+<p>Install them by the following commands in the project directory:</p>
 
 `npm install`
-
 `npm install run-func`
-
 `npm install --save-dev jest`
 
 <h2 name="app">Application Execution</h2>
+<h3>The app runs by design three diferente commands on the project directory.</h3>
 
-<p>The app runs by design three diferente commands on the project directory:</p>
+`npm run getinfo` : Shows on the console an array of the names and the id's.
 
-`npm run getnames` : Shows on the console an array the names of all the employees listed on the "employees.txt" file.
+`npm run compare <id1> <id2>` : Shows a message indicating the number of times both employees are in the office at the same time. Example: `npm run compare 1 3`
 
-`npm run compare <name1> <name2>` : Shows a message indicating the number of times both employees are in the office at the same time. The names could be written in lower, upper or any case format. Example: `npm run compare astrid andres`
-
-`npm run compareall` : Show all the possible pair-combination of all employees listed on "employees.txt" and the amount of times they share time in the office.
+`npm run compareall` : Show all the possible pair-combination of all employees instantiated and the amount of times they share time in the office.
 
 <h2 name="test">Jest Testing</h2>
-<p>The jest library for unit testing was used to test the code with the next considerations:</p>
+
+Jest library (v. 29.2.1) is used to run <strong>unit testing</strong>. The code is develop on the file located in "/test/ioet.test.js".
+The syntax and functions for the Jest library can be found here:
+https://jestjs.io/docs/getting-started
+
+<h3>Function being tested</h3>
+
+In this file we import the functions tested from "ioet.js" as a module name "testFunctions". The test consist of the following 5 unit tests.
+
 <ul>
-<li>The main testing file is located on "/test/ioet.test.js"</li>
-<li>The testing was made using variables asigned in the same file in order to easy change the inputs and expected results</li>
-<li>The testing uses variables returned from executing function in the same file.</li>
-<li>The test uses a library function call <strong>test() which takes two parameters</strong>.
-    <ol>
-        <li>The title of the test, in any string value.</li>
-        <li>A callback function with no parameters using a inner expect() function with a value expected expected to be compared with the rules of the method that follows the function. For example: expected(value).toBe(1). There are several methods. </li>
-    </ol>
-The test can be run using the command:
+	<li><strong>bringEmployee</strong> function returns Array-Object</li>
+	<li><strong>bringEmployee</strong>  function returns empty array</li>
+	<li><strong>checkNames</strong> returns true or false if employeeOne and employeeTwo are valid or not</li>
+	<li><strong>compareDays</strong> returns day that employees matched</li>
+	<li><strong>compareTimetable</strong> returns what expected</li>
+</ul>
 
+The test can be run using the command in the project directory:
 `npm test` : run the 5 test in the file.
-
-</li>
 
 <h2 name="code">App Code: technical design of functions</h2>
     
