@@ -163,7 +163,7 @@ In the main directory of the project there is a file called "ioet.js". In that f
 </details>
 
 <details>
- <summary><h3>3) checkIds(employeeOneArray,employeeTwoArray)</h3></summary>
+    <summary><h3>3) checkIds(employeeOneArray,employeeTwoArray)</h3></summary>
     <p>The function takes as an argument two arrays, each with a single object of the selected employee.</p>
     <p>Inside, the function has <strong>two conditions the arrays must fullfil:</strong>.</p>
     <p>The <strong>first one</strong> controls if the parameters are the same.</p>

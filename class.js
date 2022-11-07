@@ -1,5 +1,5 @@
 class Employee {
-    constructor(name,{monday = "",tuesday = "",wednesday = "",thursday = "",friday = "",saturday = "",sunday= ""}){
+    constructor(name,{monday = "",tuesday = "",wednesday = "",thursday = "",friday = "",saturday = "",sunday= ""}={}){
         this.name=name;
         this.monday=monday;
         this.tuesday=tuesday;
@@ -12,10 +12,10 @@ class Employee {
     
     static id = 0;
     static employeesArray = [];
-    static addEmployee(objects){
-        for (let object of objects){
+    static addEmployee(array){
+        for (let elm of array){
             Employee.id++;
-            Employee.employeesArray.push({id:Employee.id,...object});
+            Employee.employeesArray.push({id:Employee.id,...elm});
         }
     }
 }
@@ -26,6 +26,7 @@ const employee3 = new Employee("MARIANO",{monday:"10:30-15:00",thursday:"20:00-2
 const employee4 = new Employee("JUAN CRUZ",{sunday:"10:00-17:00",thursday:"16:00-20:00",friday:"12:00-18:00",saturday:"10:00-13:00"})
 const employee5 = new Employee("TOMAS",{monday:"15:00-20:00",wednesday:"10:00-18:00",thursday:"09:00-13:00",saturday:"15:00-19:00"})
 const employee6 = new Employee("MANUEL",{sunday:"17:00-20:00",thursday:"18:00-22:00",friday:"10:00-16:00",saturday:"08:00-12:00"})
+
 
 Employee.addEmployee([  employee1,
                         employee2,
