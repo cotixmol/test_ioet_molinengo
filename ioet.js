@@ -8,24 +8,24 @@ const bringEmployee = (employeeId) => {
         const employeesArray = Employee.employeesArray;
         const employeeArray = employeesArray.filter((elm) => elm.id === parseInt(employeeId))
         return employeeArray
-    }catch(ReferenceError){
+    }catch{
         console.log("La clase Employee no fue importada correctamente")
     }
 }
-const checkNames = (employeeOneArray,employeeTwoArray) =>{
+const checkIds = (employeeOneArray,employeeTwoArray) =>{
     try{
-        const conditionA = ((employeeOneArray[0].id) === (employeeTwoArray[0].id));
-        const conditionB = (employeeOneArray == false || employeeTwoArray == false); 
+        const areTheSame = ((employeeOneArray[0].id) === (employeeTwoArray[0].id));
+        const isEmptyArray = (employeeOneArray == false || employeeTwoArray == false); 
         
-        if(conditionA && conditionB){
+        if(areTheSame && isEmptyArray){
             console.log("Ingresar id de empleados validos");
             return false;
     
-        }else if(conditionA){
+        }else if(areTheSame){
             console.log("No se puede comparar a la misma persona");
             return false;
     
-        }else if(conditionB){
+        }else if(isEmptyArray){
             console.log("Una o ambas personas no existen");
             return false;
     
@@ -45,61 +45,68 @@ const checkTimes = (employeeOneArray,employeeTwoArray,day) =>{
         const employeeTwoStartTime = (employeeTwoArray[0][day].split("-"))[0];
         const employeeTwoEndTime = (employeeTwoArray[0][day].split("-"))[1]    
     
-        const conditionA = (employeeOneStartTime.length===5 && employeeOneStartTime<"23:59");
-        const conditionB = (employeeOneEndTime.length===5 && employeeOneEndTime<"23:59");
-        const conditionC = (employeeTwoStartTime.length===5 && employeeTwoStartTime<"23:59");
-        const conditionD = (employeeTwoEndTime.length===5 && employeeTwoEndTime<"23:59");
-        const conditionE = (employeeOneEndTime>employeeOneStartTime)
-        const conditionF = (employeeTwoEndTime>employeeTwoStartTime)
+        const areTimesLenghtCorrect = (employeeOneStartTime.length===5 && employeeOneEndTime.length===5 && employeeTwoStartTime.length===5 && employeeTwoEndTime.length===5);
+        const areTimeLimitCorrectFirstCondition = (employeeOneStartTime<"23:59" && employeeTwoStartTime<"23:59" && employeeOneEndTime<"23:59" && employeeTwoEndTime<"23:59");
+        const areTimeLimitCorrectSecondCondition = (employeeOneStartTime>"00:00" && employeeTwoStartTime>"00:00" && employeeOneEndTime>"00:00" && employeeTwoEndTime>"00:00");
+        const areMinutesFormatCorrect = (employeeOneStartTime.slice(3,5)<"59" && employeeTwoStartTime.slice(3,5)<"59" && employeeOneEndTime.slice(3,5)<"59" && employeeTwoEndTime.slice(3,5)<"59");
+        const areStartEndTimeLogicOne = (employeeOneEndTime>employeeOneStartTime)
+        const areStartEndTimeLogicTwo = (employeeTwoEndTime>employeeTwoStartTime)
     
-        if (conditionA && conditionB && conditionC && conditionD && conditionE & conditionF){
+        if (areTimesLenghtCorrect &&
+            areTimeLimitCorrectFirstCondition &&
+            areTimeLimitCorrectSecondCondition &&
+            areStartEndTimeLogicOne &&
+            areStartEndTimeLogicTwo &&
+            areMinutesFormatCorrect){
+
             const times = [employeeOneStartTime,employeeOneEndTime,employeeTwoStartTime,employeeTwoEndTime]
             return times
         }else{
-            console.log("Hay errores en las horas de ingreso y de salida en el archivo employees.txt")
+            console.log("Hay errores en las horas de ingreso y de salida en la instanciación de la clase Employee")
             throw new Error;
         }
     }catch{
-        console.log("Error en la estructura horario del archivo employees.txt")
+        console.log("Error en la estructura horaria de la instanciación de la clase Employee")
     }
 }
 const compareDays = (employeeOneArray,employeeTwoArray) =>{
     const daysMatched = new Object();
-    const namesChecked = checkNames(employeeOneArray,employeeTwoArray)
+    const areIdsChecked = checkIds(employeeOneArray,employeeTwoArray)
     
-    if (namesChecked){
+    if (areIdsChecked){
         try{
             for (let day of daysOfWeek){
-                if (employeeOneArray[0][day] == false || employeeTwoArray[0][day] == false){
-                }else{
-                    const times = checkTimes (employeeOneArray,employeeTwoArray,day)
-                    daysMatched[day]=times;
+                const areNotInOffice = employeeOneArray[0][day] == false || employeeTwoArray[0][day] == false;
+                if (areNotInOffice){
+                continue;
                 }
+                const times = checkTimes (employeeOneArray,employeeTwoArray,day)
+                daysMatched[day]=times;
             }
             return daysMatched  
         }catch{
-            console.log("Algun dato horario en el archivo .txt esta formateado erroneamente")
+            console.log("Algun dato horario en la instanciación de la clase Employee esta formateado erroneamente")
         }
     }else{
-        console.log("Error en la introducción de nombres")
+        console.log("Error en la introducción de id")
     }
 }
 const compareTimes = (daysMatched) =>{
     let ocurrences = Object.keys(daysMatched).length;
     for (let day of daysOfWeek){
 
-        if (daysMatched[day] === undefined){}
-        else{
-            let employeeOneStartTime = daysMatched[day][0]
-            let employeeOneEndTime = daysMatched[day][1]
-            let employeeTwoStartTime = daysMatched[day][2]
-            let employeeTwoEndTime = daysMatched[day][3]
-            
-            if (employeeOneEndTime>=employeeTwoStartTime && employeeTwoEndTime>=employeeOneStartTime){
-            }else{
-                ocurrences-=1;
-            }
+        if (daysMatched[day] === undefined){
+        continue
         }
+        let employeeOneStartTime = daysMatched[day][0]
+        let employeeOneEndTime = daysMatched[day][1]
+        let employeeTwoStartTime = daysMatched[day][2]
+        let employeeTwoEndTime = daysMatched[day][3]
+            
+        if (employeeOneEndTime>=employeeTwoStartTime && employeeTwoEndTime>=employeeOneStartTime){
+        continue
+        }
+        ocurrences-=1;
     }
     return ocurrences
 }
@@ -172,7 +179,7 @@ const compareAllTimetable = () =>{
 
 module.exports = {
     bringEmployee,
-    checkNames,
+    checkIds,
     compareDays,
     compareTimetable,
     compareAllTimetable,

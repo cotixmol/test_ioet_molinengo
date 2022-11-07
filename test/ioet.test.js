@@ -22,16 +22,16 @@ test("bringEmployee function returns empty array", ()=>{
     expect(employeeEmpty).toEqual([]);
 });
 test("checkNames returns true or false if employeeOne and employeeTwo are valid or not", ()=>{
-    expect(testFunctions.checkNames(employeeEmpty,employeeEmpty)).toBe(false);
-    expect(testFunctions.checkNames(employeeEmpty,employeeId1Array)).toBe(false);
+    expect(testFunctions.checkIds(employeeEmpty,employeeEmpty)).toBe(false);
+    expect(testFunctions.checkIds(employeeEmpty,employeeId1Array)).toBe(false);
 
-    expect(testFunctions.checkNames(employeeId1Array,employeeEmpty)).toBe(false);
-    expect(testFunctions.checkNames(employeeId1Array,employeeId1Array)).toBe(false);
+    expect(testFunctions.checkIds(employeeId1Array,employeeEmpty)).toBe(false);
+    expect(testFunctions.checkIds(employeeId1Array,employeeId1Array)).toBe(false);
 
-    expect(testFunctions.checkNames(employeeId1Array,notEmployeeId2Array)).toBe(false);
-    expect(testFunctions.checkNames(false,false)).toBe(false);
+    expect(testFunctions.checkIds(employeeId1Array,notEmployeeId2Array)).toBe(false);
+    expect(testFunctions.checkIds(false,false)).toBe(false);
 
-    expect(testFunctions.checkNames(employeeId1Array,employeeId2Array)).toBe(true)
+    expect(testFunctions.checkIds(employeeId1Array,employeeId2Array)).toBe(true)
 
 });
 test("compareDays returns day that employees matched",()=>{
