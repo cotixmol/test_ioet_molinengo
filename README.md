@@ -67,6 +67,7 @@ It was requested by the recruiting team from <strong>Ioet</strong> to develop an
 
 <p>The <strong>name value</strong> must be equal to a string.
 The <strong>day:time</strong> pairs must be formatted as it follows.</p>
+
 `day:"HH:MM-HH:MM"`
 
 <ol>
@@ -95,7 +96,9 @@ In the project directory there is a "package.json" file where the dependencies u
 <p>Install them by the following commands in the project directory:</p>
 
 `npm install`
+
 `npm install run-func`
+
 `npm install --save-dev jest`
 
 <h2 name="app">Application Execution</h2>
