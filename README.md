@@ -225,6 +225,7 @@ In the main directory of the project there is a file called "ioet.js". In that f
 ```
 
 <p> If everything works as intended it <strong>displays a log message with the time of ocurrences between two employees selected.</strong></p>
+</details>
 
 <details>
 <summary><h3>7) compareAllTimetable( )</h3></summary>
